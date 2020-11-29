@@ -1,4 +1,3 @@
-
 export default class TennisGame3 {
     p2 = 0;
     p1 = 0;

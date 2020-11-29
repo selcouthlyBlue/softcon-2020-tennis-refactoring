@@ -1,4 +1,3 @@
-
 export default class TennisGame1 {
     m_score1 = 0;
     m_score2 = 0;
@@ -39,7 +38,6 @@ export default class TennisGame1 {
                 default:
                     score = "Deuce";
                     break;
-
             }
         }
         else if (m_score1 >= 4 || m_score2 >= 4) {
