@@ -23,7 +23,7 @@
     "serve": "node dist/index.js",
     "start": "babel-node src/index.js",
     "start:dev": "nodemon src/index.js --exec babel-node",
-    "test": "jest --runInBand --verbose --watchAll",
+    "test": "jest --runInBand --verbose",
     "coverage": "jest --coverage --runInBand --verbose",
     "eslint": "eslint src/**/*.js --ignore-pattern \"node_modules/\""
   },

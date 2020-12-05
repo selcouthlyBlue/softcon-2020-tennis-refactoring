@@ -19,10 +19,8 @@ export default class TennisGame1 {
     getScore() {
         let score = "";
         let tempScore = 0;
-        let m_score1 = this.m_score1;
-        let m_score2 = this.m_score2;
-        if (m_score1 === m_score2) {
-            switch (m_score1) {
+        if (this.m_score1 === this.m_score2) {
+            switch (this.m_score1) {
                 case 0:
                     score = "Love-All";
                     break;
@@ -40,8 +38,8 @@ export default class TennisGame1 {
                     break;
             }
         }
-        else if (m_score1 >= 4 || m_score2 >= 4) {
-            let minusResult = m_score1 - m_score2;
+        else if (this.m_score1 >= 4 || this.m_score2 >= 4) {
+            let minusResult = this.m_score1 - this.m_score2;
             if (minusResult === 1) score = "Advantage player1";
             else if (minusResult === -1) score = "Advantage player2";
             else if (minusResult >= 2) score = "Win for player1";
@@ -50,8 +48,8 @@ export default class TennisGame1 {
         else {
             for (let i = 1; i < 3; i++)
             {
-                if (i === 1) tempScore = m_score1;
-                else { score += "-"; tempScore = m_score2; }
+                if (i === 1) tempScore = this.m_score1;
+                else { score += "-"; tempScore = this.m_score2; }
                 switch (tempScore) {
                     case 0:
                         score += "Love";
