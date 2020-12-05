@@ -11,23 +11,20 @@ export default class TennisGame3 {
 
     getScore() {
         let s;
-        let p1 = this.p1;
-        let p2 = this.p2;
-        
-        if (p1 < 4 && p2 < 4) {
-            let p = ["Love", "Fifteen", "Thirty", "Forty"]; 
-            s = p[p1];
-            return (p1 === p2) ? s + "-All" : s + "-" + p[p2];
+        if (this.p1 < 4 && this.p2 < 4) {
+            const p = ["Love", "Fifteen", "Thirty", "Forty"];
+            s = p[this.p1];
+            return this.p1 == this.p2 ? `${s}-All` : `${s}-${p[this.p2]}`;
         } else {
-            if (p1 === p2)
+            if (this.p1 == this.p2)
                 return "Deuce";
-            s = p1 > p2 ? p1N : p2N;
-            return ((p1-p2)*(p1-p2) == 1) ? "Advantage " + s : "Win for " + s;
+            s = this.p1 > this.p2 ? "player1" : "player2";
+            return ((this.p1 - this.p2) * (this.p1 - this.p2) == 1) ? `Advantage ${s}` : `Win for ${s}`; 
         }
     }
-    
+
     wonPoint(playerName) {
-        if (playerName === "player1")
+        if(playerName == "player1")
             this.p1 += 1;
         else
             this.p2 += 1;
