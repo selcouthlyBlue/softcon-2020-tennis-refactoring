@@ -1,8 +1,11 @@
-import each from 'jest-each';
+const each = require('jest-each').default;
 
-import TennisGame1 from '../main/TennisGame1';
-import TennisGame2 from '../main/TennisGame2';
-import TennisGame3 from '../main/TennisGame3';
+// eslint-disable-next-line no-unused-vars
+const TennisGame1 = require('../main/TennisGame1');
+// eslint-disable-next-line no-unused-vars
+const TennisGame2 = require('../main/TennisGame2');
+// eslint-disable-next-line no-unused-vars
+const TennisGame3 = require('../main/TennisGame3');
 
 describe("Tennis Game", () => {
     each([
@@ -53,6 +56,6 @@ describe("Tennis Game", () => {
             if (i < p2Score)
                 game.wonPoint("player2");
         }
-        expect(expected).toBe(game.getScore());
+        expect(game.getScore()).toBe(expected);
     })
 })
