@@ -1,8 +1,11 @@
-import each from 'jest-each';
+const each = require('jest-each').default;
 
-import TennisGame1 from '../main/TennisGame1';
-import TennisGame2 from '../main/TennisGame2';
-import TennisGame3 from '../main/TennisGame3';
+// eslint-disable-next-line no-unused-vars
+const TennisGame1 = require('../main/TennisGame1');
+// eslint-disable-next-line no-unused-vars
+const TennisGame2 = require('../main/TennisGame2');
+// eslint-disable-next-line no-unused-vars
+const TennisGame3 = require('../main/TennisGame3');
 
 describe("Tennis Game", () => {
     each([
@@ -45,7 +48,7 @@ describe("Tennis Game", () => {
         [ 16, 14, "Win for player1"],
         [ 14, 16, "Win for player2"],
     ]).it("should give the correct tennis scores for %d-%d", (p1Score, p2Score, expected) => {
-        const game = new TennisGame2("player1", "player2");
+        const game = new TennisGame1("player1", "player2");
         const highestScore = Math.max(p1Score, p2Score);
         for (let i = 0; i < highestScore; i++) {
             if (i < p1Score)
