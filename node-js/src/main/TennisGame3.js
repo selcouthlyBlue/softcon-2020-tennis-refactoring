@@ -1,31 +1,31 @@
-const TennisGame3 = function (p1N, p2N) {
-    let p1 = 0;
-    let p2 = 0;
+class TennisGame3 {
+    constructor(p1N, p2N) {
+        this.p1N = p1N;
+        this.p2N = p2N;
+        
+        this.p1 = 0;
+        this.p2 = 0;
+    }
 
-    const getScore = function () {
+    getScore() {
         let s;
-        if (p1 < 4 && p2 < 4) {
+        if (this.p1 < 4 && this.p2 < 4) {
             const p = ["Love", "Fifteen", "Thirty", "Forty"];
-            s = p[p1];
-            return (p1 == p2) ? s + "-All" : s + "-" + p[p2];
+            s = p[this.p1];
+            return (this.p1 == this.p2) ? s + "-All" : s + "-" + p[this.p2];
         } else {
-            if (p1 == p2)
+            if (this.p1 == this.p2)
                 return "Deuce";
-            s = p1 > p2 ? p1N : p2N;
-            return ((p1 - p2) * (p1 - p2) == 1) ? "Advantage " + s : "Win for " + s;
+            s = this.p1 > this.p2 ? this.p1N : this.p2N;
+            return ((this.p1 - this.p2) * (this.p1 - this.p2) == 1) ? "Advantage " + s : "Win for " + s;
         }
     }
 
-    const wonPoint = function (playerName) {
+    wonPoint(playerName) {
         if (playerName == "player1")
-            p1 += 1;
+            this.p1 += 1;
         else
-            p2 += 1;
-    }
-
-    return {
-        getScore,
-        wonPoint
+            this.p2 += 1;
     }
 }
 
