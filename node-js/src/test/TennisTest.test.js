@@ -48,7 +48,7 @@ describe("Tennis Game", () => {
         [ 16, 14, "Win for player1"],
         [ 14, 16, "Win for player2"],
     ]).it("should give the correct tennis scores for %d-%d", (p1Score, p2Score, expected) => {
-        const game = new TennisGame3("player1", "player2");
+        const game = new TennisGame1("player1", "player2");
         const highestScore = Math.max(p1Score, p2Score);
         for (let i = 0; i < highestScore; i++) {
             if (i < p1Score)
