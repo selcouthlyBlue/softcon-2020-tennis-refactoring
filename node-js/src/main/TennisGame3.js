@@ -1,31 +1,63 @@
+const TENNIS_SCORES = ["Love", "Fifteen", "Thirty", "Forty"];
+
 class TennisGame3 {
     constructor(p1N, p2N) {
-        this.p1N = p1N;
-        this.p2N = p2N;
-        
-        this.p1 = 0;
-        this.p2 = 0;
+        this.player1Name = p1N;
+        this.player2Name = p2N;
+
+        this.player1Points = 0;
+        this.player2Points = 0;
     }
 
     getScore() {
-        let s;
-        if (this.p1 < 4 && this.p2 < 4) {
-            const p = ["Love", "Fifteen", "Thirty", "Forty"];
-            s = p[this.p1];
-            return (this.p1 == this.p2) ? s + "-All" : s + "-" + p[this.p2];
-        } else {
-            if (this.p1 == this.p2)
-                return "Deuce";
-            s = this.p1 > this.p2 ? this.p1N : this.p2N;
-            return ((this.p1 - this.p2) * (this.p1 - this.p2) == 1) ? "Advantage " + s : "Win for " + s;
-        }
+        if (this.tied()) return this.tiedScore();
+        if (this.neitherPlayerHasWon()) return this.runningScore();
+        if (this.deuce()) return "Deuce";
+        if (this.aPlayerHasTheAdvantage()) return this.advantageScore();
+        return this.winningScore();
+    }
+
+    winningScore() {
+        return `Win for ${this.playerInLead()}`;
+    }
+
+    advantageScore() {
+        return `Advantage ${this.playerInLead()}`;
+    }
+
+    deuce() {
+        return this.player1Points === this.player2Points && this.player1Points >= 3;
+    }
+
+    playerInLead() {
+        return this.player1Points > this.player2Points ? this.player1Name : this.player2Name;
+    }
+
+    aPlayerHasTheAdvantage() {
+        return (this.player1Points - this.player2Points) * (this.player1Points - this.player2Points) == 1;
+    }
+
+    runningScore() {
+        return TENNIS_SCORES[this.player1Points] + "-" + TENNIS_SCORES[this.player2Points];
+    }
+
+    tiedScore() {
+        return TENNIS_SCORES[this.player1Points] + "-All";
+    }
+
+    tied() {
+        return this.player1Points == this.player2Points && this.player1Points < 4;
+    }
+
+    neitherPlayerHasWon() {
+        return this.player1Points < 4 && this.player2Points < 4;
     }
 
     wonPoint(playerName) {
         if (playerName == "player1")
-            this.p1 += 1;
+            this.player1Points += 1;
         else
-            this.p2 += 1;
+            this.player2Points += 1;
     }
 }
 

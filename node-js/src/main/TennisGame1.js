@@ -3,67 +3,85 @@ class TennisGame1 {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
 
-        this.m_score1 = 0;
-        this.m_score2 = 0;
+        this.player1Score = 0;
+        this.player2Score = 0;
     }
 
     wonPoint(playerName) {
         if (playerName == "player1")
-            this.m_score1 += 1;
+            this.player1Score += 1;
         else
-            this.m_score2 += 1;
+            this.player2Score += 1;
     }
 
     getScore() {
-        let score = "";
+        if (this.tied()) {
+            return this.tiedScore();
+        }
+        if (this.tiebreaking()) {
+            return this.tiebreakingScore();
+        }
+        return this.runningScore();
+    }
+
+    runningScore() {
         let tempScore = 0;
-        if (this.m_score1 === this.m_score2) {
-            switch (this.m_score1) {
+        let score = '';
+        for (let i = 1; i < 3; i++) {
+            if (i === 1)
+                tempScore = this.player1Score;
+            else { score += "-"; tempScore = this.player2Score; }
+            switch (tempScore) {
                 case 0:
-                    score = "Love-All";
+                    score += "Love";
                     break;
                 case 1:
-                    score = "Fifteen-All";
+                    score += "Fifteen";
                     break;
                 case 2:
-                    score = "Thirty-All";
+                    score += "Thirty";
                     break;
                 case 3:
-                    score = "Forty-All";
+                    score += "Forty";
                     break;
-                default:
-                    score = "Deuce";
-                    break;
-            }
-        }
-        else if (this.m_score1 >= 4 || this.m_score2 >= 4) {
-            let minusResult = this.m_score1 - this.m_score2;
-            if (minusResult === 1) score = `Advantage ${this.player1Name}`;
-            else if (minusResult === -1) score = `Advantage ${this.player2Name}`;
-            else if (minusResult >= 2) score = `Win for ${this.player1Name}`;
-            else score = `Win for ${this.player2Name}`;
-        }
-        else {
-            for (let i = 1; i < 3; i++) {
-                if (i === 1) tempScore = this.m_score1;
-                else { score += "-"; tempScore = this.m_score2; }
-                switch (tempScore) {
-                    case 0:
-                        score += "Love";
-                        break;
-                    case 1:
-                        score += "Fifteen";
-                        break;
-                    case 2:
-                        score += "Thirty";
-                        break;
-                    case 3:
-                        score += "Forty";
-                        break;
-                }
             }
         }
         return score;
+    }
+
+    tiebreakingScore() {
+        let minusResult = this.player1Score - this.player2Score;
+        if (minusResult === 1)
+            return `Advantage ${this.player1Name}`;
+        else if (minusResult === -1)
+            return `Advantage ${this.player2Name}`;
+        else if (minusResult >= 2)
+            return `Win for ${this.player1Name}`;
+        else
+            return `Win for ${this.player2Name}`;
+    }
+
+    tiebreaking() {
+        return this.player1Score >= 4 || this.player2Score >= 4;
+    }
+
+    tiedScore() {
+        switch (this.player1Score) {
+            case 0:
+                return "Love-All";
+            case 1:
+                return "Fifteen-All";
+            case 2:
+                return "Thirty-All";
+            case 3:
+                return "Forty-All";
+            default:
+                return "Deuce";
+        }
+    }
+
+    tied() {
+        return this.player1Score === this.player2Score;
     }
 }
 

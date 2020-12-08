@@ -1,28 +1,16 @@
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
 
-@RunWith(Parameterized.class)
 public class TennisTest {
 
-    private int player1Score;
-    private int player2Score;
-    private String expectedScore;
-
-    public TennisTest(int player1Score, int player2Score, String expectedScore) {
-        this.player1Score = player1Score;
-        this.player2Score = player2Score;
-        this.expectedScore = expectedScore;
-    }
-
-    @Parameters
-    public static Collection<Object[]> getAllScores() {
+    public static Collection<Object[]> allScores() {
         return Arrays.asList(new Object[][] {
                 { 0, 0, "Love-All" },
                 { 1, 1, "Fifteen-All" },
@@ -65,17 +53,19 @@ public class TennisTest {
         });
     }
 
-    @Test
-    public void checkAllScores() {
+
+    @ParameterizedTest
+    @MethodSource("allScores")
+    public void checkAllScores(int player1Score, int player2Score, String expectedScore) {
         // NOTE: Change this TennisGame to the version you want to refactor
         TennisGame1 game = new TennisGame1("player1", "player2");
-        int highestScore = Math.max(this.player1Score, this.player2Score);
+        int highestScore = Math.max(player1Score, player2Score);
         for (int i = 0; i < highestScore; i++) {
-            if (i < this.player1Score)
+            if (i < player1Score)
                 game.wonPoint("player1");
-            if (i < this.player2Score)
+            if (i < player2Score)
                 game.wonPoint("player2");
         }
-        assertEquals(this.expectedScore, game.getScore());
+        Assertions.assertEquals(expectedScore, game.getScore());
     }
 }
